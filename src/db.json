@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "posttext": "Captain",
+      "postcomments": ["America"],
+      "id": 6
+    },
+    {
+      "posttext": "Hawkeye",
+      "postcomments": [
+        "some comment from postman 4"
+      ],
+      "id": 15
+    }
+  ]
+}
