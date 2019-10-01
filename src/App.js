@@ -42,17 +42,21 @@ class App extends React.Component {
                 })
             })
     }
-    postComments = (id,comments) => {
-        let getData = () =>
-        axios.get(`http://localhost:8080/posts/${id}`)
-        .finally(getResult => {
-            return getResult.postcomments
-        })
-         let commentarr = getData()
-         console.log('commentarr',commentarr)
-         
-        }
- 
+  postComments = (id, comments) => {
+    const existingComments =
+      this.state.list.find(post => post.id === id).postcomments || []
+    axios
+      .patch(`http://localhost:8080/posts/${id}`, {
+        postcomments: [comments, ...existingComments],
+      })
+      .then(result => {
+        // https://stackoverflow.com/a/35206193
+        const foundIndex = this.state.list.findIndex(post => post.id === id)
+        const list = [...this.state.list]
+        list[foundIndex] = result.data
+        this.setState({ list })
+      })
+  }
     
 
     render(){
